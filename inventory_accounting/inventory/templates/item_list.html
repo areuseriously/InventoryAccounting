@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .btn-new {
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    color: white;
+    background: #0B63F6;
+    box-shadow: 0 3px 0 #003CC5;
+    }
+
+    .btn-new:hover {
+        background: #003CC5;
+        box-shadow: none;
+        position: relative;
+        top: 3px;
+    }
+    .table {
+	width: 100%;
+	border: none;
+	margin-bottom: 20px;
+    }
+    .table thead th {
+        font-weight: bold;
+        text-align: left;
+        border: none;
+        padding: 10px 15px;
+        background: #d8d8d8;
+        font-size: 14px;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+    .table tbody td {
+        text-align: left;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px 15px;
+        font-size: 14px;
+        vertical-align: top;
+    }
+    .table thead tr th:first-child, .table tbody tr td:first-child {
+        border-left: none;
+    }
+    .table thead tr th:last-child, .table tbody tr td:last-child {
+        border-right: none;
+    }
+    .table tbody tr:nth-child(even){
+        background: #f3f3f3;
+    }
+</style>
+
+<div class="col-md-8 offset-md-2">
+    <h1>Список инвентаря</h1>
+    <hr>
+    <a class="btn-new" href="{% url 'item_create' %}">Создать ТМЦ</a>
+    <a class="btn-new" href="{% url 'download-items' user.id %}">Скачать список</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Система</th>
+            <th>Количество</th>
+            <th>Расположение</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+        <tr>
+            <td><a href="{% url 'item_detail' item.id %}" class="item-title">{{ item.name }}</a></td>
+            <td>{{ item.system }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.placement }}</td>
+            <td><a class="btn-new" href="{% url 'item_edit' item.id %}">Изменить</a></td>
+            <td><a class="btn-new" href="{% url 'item_delete' item.id %}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}

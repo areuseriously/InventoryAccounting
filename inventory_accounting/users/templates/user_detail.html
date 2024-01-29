@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .btn-new {
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    color: white;
+    background: #0B63F6;
+    box-shadow: 0 3px 0 #003CC5;
+    }
+
+    .btn-new:hover {
+        background: #003CC5;
+        box-shadow: none;
+        position: relative;
+        top: 3px;
+    }
+    .table {
+	width: 100%;
+	border: none;
+	margin-bottom: 20px;
+    }
+    .table thead th {
+        font-weight: bold;
+        text-align: left;
+        border: none;
+        padding: 10px 15px;
+        background: #d8d8d8;
+        font-size: 14px;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+    .table tbody td {
+        text-align: left;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px 15px;
+        font-size: 14px;
+        vertical-align: top;
+    }
+    .table thead tr th:first-child, .table tbody tr td:first-child {
+        border-left: none;
+    }
+    .table thead tr th:last-child, .table tbody tr td:last-child {
+        border-right: none;
+    }
+    .table tbody tr:nth-child(even){
+        background: #f3f3f3;
+    }
+</style>
+<div class="col-md-8 offset-md-2">
+    <h1>Сотрудник: {{ user.last_name }} {{ user.first_name }}</h1>
+    <p>Отдел: {{ user_profile.department.name }}</p>
+    <p>Должность: {{ user_profile.position.name }}</p>
+    <a class="btn-new" href="{% url 'download-user-items' user.id %}">Скачать список</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Система</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in user_inventory %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.system }}</td>
+            <td>{{ item.quantity }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

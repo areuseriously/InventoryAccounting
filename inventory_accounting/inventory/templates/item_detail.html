@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+    <h1>Название: {{ item.name }}</h1>
+    <p>Описание: {{ item.description }}</p>
+    <p>Система: {{ item.system }}</p>
+    <p>Количество: {{ item.quantity }}</p>
+    <p>Инвентарный номер: {{ item.inv_num }}</p>
+    <p>Расположение: {{ item.placement }}</p>
+    <p>Дата ввода в эксплуатацию: {{ item.commissioning }}</p>
+    <p>Срок аммортизации: {{ item.depreciation }}</p>
+    <form action="/inventory/item/{{ item.id }}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.body }}
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+    <h3>Комментарии:</h3>
+    {% for comment in comments %}
+    <p>Дата: {{ comment.created_on.date }}</p>
+    <p>{{ comment.body }}</p>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}

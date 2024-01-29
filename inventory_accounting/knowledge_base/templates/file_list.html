@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .btn-new {
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    color: white;
+    background: #0B63F6;
+    box-shadow: 0 3px 0 #003CC5;
+    }
+
+    .btn-new:hover {
+        background: #003CC5;
+        box-shadow: none;
+        position: relative;
+        top: 3px;
+    }
+    .table {
+	width: 100%;
+	border: none;
+	margin-bottom: 20px;
+    }
+    .table thead th {
+        font-weight: bold;
+        text-align: left;
+        border: none;
+        padding: 10px 15px;
+        background: #d8d8d8;
+        font-size: 14px;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+    .table tbody td {
+        text-align: left;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px 15px;
+        font-size: 14px;
+        vertical-align: top;
+    }
+    .table thead tr th:first-child, .table tbody tr td:first-child {
+        border-left: none;
+    }
+    .table thead tr th:last-child, .table tbody tr td:last-child {
+        border-right: none;
+    }
+    .table tbody tr:nth-child(even){
+        background: #f3f3f3;
+    }
+</style>
+  <div class="col-md-8 offset-md-2">
+    <h1>База знаний</h1>
+    <hr>
+    <a class="btn-new" href="{% url 'file_create' %}">Добавить файл</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Категория</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+        <tr>
+            <td>{{ file.title }}</td>
+            <td>{{ file.category }}</td>
+            <td><a class="btn-new" href="{% url 'file_download' file.id %}">Скачать</a></td>
+            <td><a class="btn-new" href="{% url 'file_delete' file.id %}">Удалить</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No files yet.</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+<h2>Files</h2>
+  <a href="{% url 'file_create' %}">Add file</a>
+  <ul>
+    {% for file in files %}
+      <li>
+        {{ file.title }} - {{ file.category }}
+        <a href="{% url 'file_download' file.id %}">Download</a>
+        <a href="{% url 'file_delete' file.id %}">Delete</a>
+      </li>
+    {% empty %}
+      <li>No files yet.</li>
+    {% endfor %}
+  </ul>

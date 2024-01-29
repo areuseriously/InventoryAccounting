@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<div class="col-md-8 offset-md-2">
+  <h2>Профиль</h2>
+  <p>First Name: {{ user.first_name }}</p>
+  <p>Last Name: {{ user.last_name }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Department: {{ user_profile.department.name }}</p>
+  <p>Position: {{ user_profile.position.name }}</p>
+</div>
+{% endblock %}

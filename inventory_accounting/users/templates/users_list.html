@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+  <h1>Все сотрудники</h1>
+  <table>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td><a href="{% url 'user_detail' user.id %}">{{ user.last_name }} {{ user.first_name }}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

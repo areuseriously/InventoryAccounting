@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{%load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>Welcome to your dashboard!</p>
+    <p>Имя: {{ user.first_name }}</p>
+    <p>Фамилия: {{ user.last_name }}</p>
+    <p>Отдел: {{ user_profile.department.name }}</p>
+    <p>Должность: {{ user_profile.position.name }}</p>
+{% endblock %}
